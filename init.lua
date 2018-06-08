@@ -1,38 +1,19 @@
-local module = {
---[=[
-    _NAME        = 'mjolnir._asm.timer',
-    _VERSION     = 'the 1st digit of Pi/0',
-    _URL         = 'https://github.com/asmagill/mjolnir_asm.timer',
-    _LICENSE     = [[ See README.md ]]
-    _DESCRIPTION = [[
-    
 --- === mjolnir._asm.timer ===
 ---
---- Home: https://github.com/asmagill/mjolnir_asm.timer
+--- Home: https://github.com/asmagill/mjolnir_asm.watcher
 ---
 --- Execute functions with various timing rules.
 ---
---- This module is based on code from the previous incarnation of Mjolnir by [Steven Degutis](https://github.com/sdegutis/).
+--- This module is based primarily on code from the previous incarnation of Mjolnir by [Steven Degutis](https://github.com/sdegutis/).
 
-    ]],
---]=]
-}
-
-local mjolnir_mod_name = "mjolnir._asm.timer"
-local c_library = "internal"
-
--- integration with C functions ------------------------------------------
-
-if c_library then
-	for i,v in pairs(require(mjolnir_mod_name.."."..c_library)) do module[i] = v end
-end
+local module = require("mjolnir._asm.timer.internal")
 
 -- private variables and methods -----------------------------------------
 
 local function wrap(fn)
-  return function()
+  return function(...)
     if fn then
-      local ok, err = xpcall(fn, debug.traceback)
+      local ok, err = xpcall(fn, debug.traceback, ...)
       if not ok then mjolnir.showerror(err) end
     end
   end
@@ -41,7 +22,7 @@ end
 -- Public interface ------------------------------------------------------
 
 --- mjolnir._asm.timer.new(interval, fn) -> timer
---- Function
+--- Constructor
 --- Creates a new timer that can be started; interval is specified in seconds as a decimal number.
 function module.new(interval, fn)
   local _fn = wrap(fn)

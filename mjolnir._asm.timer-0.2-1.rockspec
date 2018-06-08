@@ -10,20 +10,20 @@ package = "mjolnir._asm.timer"
 --    changing the module's source code.
 --
 --    Note: the version must match the version in the filename.
-version = "0.1-1"
+version = "0.2-1"
 
 -- General metadata:
 
-local url = "github.com/asmagill/mjolnir_asm.timer"
+local url = "github.com/asmagill/mjolnir_asm.watcher"
 local desc = "Execute functions with various timing rules in Mjolnir"
 
 -- LuaDist source
 source = {
-  tag = "0.1-1",
+  tag = "0.2-1",
   url = "git://github.com/LuaDist-testing/mjolnir._asm.timer.git"
 }
 -- Original source
--- source = {url = "git://" .. url}
+-- source = {url = "git://" .. url, dir = "mjolnir_asm.watcher/timer"}
 -- description = {
 --   summary = desc,
 --   detailed = desc,
